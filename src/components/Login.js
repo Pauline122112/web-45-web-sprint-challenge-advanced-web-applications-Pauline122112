@@ -16,13 +16,12 @@ const { push } = useHistory()
 
     
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setFormValues({
-      initialValues: {
-        ...this.formValues.initialValues,
+     
+        ...formValues,
         [e.target.name]: e.target.value
-      }
-    })
+      })
   }
   //ADD SOMETHING
   // make a post request to retrieve a token from the api
@@ -32,9 +31,9 @@ const { push } = useHistory()
 const handleSubmit = e => {
   e.preventDefault()
 
-  if (formValues.username !== "Lambda" || formValues.password !== "school")
+  if (formValues.username !== "Lambda" || formValues.password !== "School")
 	{
-    setError("Username or Password incorrect.");
+    setError("Username or Password is incorrect.");
   }
 
 }
@@ -44,7 +43,7 @@ axiosWithAuth()
   .post('/api/login', formValues)
   .then(res => {
     console.log('Login post works', res)
-    localStorage.setItem("username", res.data.username)
+    localStorage.setItem('token', res.data.payload)
     push('/protected');
   })
   .catch((err) => {
@@ -70,9 +69,10 @@ axiosWithAuth()
 						/>
 						<label htmlFor="password">Password</label>
 						<input
-							type="password"
-							data-testid="password"
 							id="password"
+							data-testid="password"
+              name='password'
+							type="password"
 							value={formValues.password}
 							onChange={handleChange}
 						/>
