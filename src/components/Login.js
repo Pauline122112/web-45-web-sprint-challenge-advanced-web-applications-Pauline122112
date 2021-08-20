@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import axios from 'axios'
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 
 const initialValues = {
@@ -35,16 +36,18 @@ const handleSubmit = e => {
     setError("Username or Password incorrect.");
   }
 
-  axios.post('http://localhost:5000/api/login', this.state.initialValues)
 
-  .then(res => {
-  this.props.history.push('/protected')
-  localStorage.setItem("token", res.data.token)
-  })
-  .catch(err => {
-    console.log(err)
-  })
+  
 }
+useEffect(() => {
+  axiosWithAuth()
+  .post('/api/login', formValues)
+  .then(res => {
+    console.log('Login post works', res)
+    localStorage.setItem("username", res.data.username)
+    this.props.history.push('/protected');
+  })
+}, [])
 
  
     return (
