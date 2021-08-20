@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react"
-import axios from 'axios'
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import React, { useState } from "react"
+import  axiosWithAuth  from "../helpers/axiosWithAuth"
 import { useHistory } from "react-router";
 
 
@@ -38,21 +37,21 @@ const handleSubmit = e => {
     setError("Username or Password incorrect.");
   }
 
-
-  
 }
-useEffect(() => {
-  axiosWithAuth()
+
+
+axiosWithAuth()
   .post('/api/login', formValues)
   .then(res => {
     console.log('Login post works', res)
     localStorage.setItem("username", res.data.username)
-    this.props.history.push('/protected');
+    push('/protected');
   })
   .catch((err) => {
     console.log({err})
-  }
-}, [])
+  })
+
+
 
  
     return (
@@ -74,7 +73,7 @@ useEffect(() => {
 							type="password"
 							data-testid="password"
 							id="password"
-							value={initialValues.password}
+							value={formValues.password}
 							onChange={handleChange}
 						/>
 						<button>Log in</button>
