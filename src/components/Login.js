@@ -1,4 +1,7 @@
-import React from "react";
+import React from "react"
+import axios from 'axios'
+import { render } from "@testing-library/react";
+
 
 const Login = () => {
   // make a post request to retrieve a token from the api
@@ -7,16 +10,34 @@ const Login = () => {
   const error = "";
   //replace with error state
 
-  return (
-    <div>
-      <h1>Welcome to the Bubble App!</h1>
-      <div data-testid="loginForm" className="login-form">
-        <h2>Build login form here</h2>
-      </div>
 
-      <p id="error" className="error">{error}</p>
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <h1>Welcome to the Bubble App!</h1>
+        <div data-testid="loginForm" className="login-form">
+          <form onSubmit={this.login}>
+          <input
+            type="text"
+            id="username"
+            value={this.state.credentials.username}
+            onChange={this.handleChange}
+          />
+          <input
+            type="password"
+            id="password"
+            value={this.state.credentials.password}
+            onChange={this.handleChange}
+          />
+          <button>Log in</button>
+        </form>
+        </div>
+  
+        <p id="error" className="error">{error}</p>
+      </div>
+    );
+    
+  }
 };
 
 export default Login;
