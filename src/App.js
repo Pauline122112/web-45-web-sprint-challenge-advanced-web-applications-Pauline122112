@@ -1,24 +1,31 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import PrivateRoute from "./components/PrivateRoute";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import "./styles.scss";
+import BubblePage from "./components/BubblePage";
 
 function App() {
-  return (
+	return (
 		<Router>
 			<div className="App">
 				<header>
 					Color Picker Sprint Challenge
-					<a data-testid="loginButton" href="#">
+					<a data-testid="loginButton" href="/login">
 						login
 					</a>
-					<a data-testid="logoutButton" href="#">
+					<a data-testid="logoutButton" href="/logout">
 						logout
+					</a>
+					<a data-testid="bubblePage" href="/protected">
+						Bubbles
 					</a>
 				</header>
 
 				<Switch>
+					<PrivateRoute exact path="/protected" component={BubblePage} />
+					<PrivateRoute path="/logout" component={Logout} />
 					<Route path="/login" component={Login} />
 					<Route path="/" component={Login} />
 				</Switch>
