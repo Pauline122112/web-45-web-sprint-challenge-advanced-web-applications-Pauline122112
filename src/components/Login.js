@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from 'axios'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useHistory } from "react-router";
 
 
 const initialValues = {
@@ -9,6 +10,7 @@ const initialValues = {
 };
 
 const Login = () => {
+const { push } = useHistory()
 
   const [formValues, setFormValues] = useState(initialValues)
   const [error, setError] = useState();
@@ -47,6 +49,9 @@ useEffect(() => {
     localStorage.setItem("username", res.data.username)
     this.props.history.push('/protected');
   })
+  .catch((err) => {
+    console.log({err})
+  }
 }, [])
 
  
