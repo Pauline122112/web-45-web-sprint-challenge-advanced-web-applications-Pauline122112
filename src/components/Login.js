@@ -3,19 +3,22 @@ import axios from 'axios'
 import { render } from "@testing-library/react";
 
 
-const Login = (e) => {
+const Login = () => {
 
- handleChange = e => {
-    this.setState({
-      credentials: {
-        ...this.state.credentials,
+const [form, setForm] = useState(initialState)
+const [error, setError] = useState();
+
+ const handleChange = e => {
+    this.setForm({
+      ...form, 
         [e.target.name]: e.target.value
       }
-    });
-  };
+    })
+  }
 
-login = e => {
+const submitHandler = e => {
   e.preventDefault()
+  //ADD SOMETHING
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
   axios.post('http://localhost:5000/api/login', this.state.credentials)
@@ -29,11 +32,7 @@ login = e => {
   })
 }
 
-  const error = "";
-  //replace with error state
-
-
-  render(){
+ 
     return (
       <div>
         <h1>Welcome to the Bubble App!</h1>
@@ -59,7 +58,7 @@ login = e => {
       </div>
     );
     
-  }
+  
 };
 
 export default Login;
