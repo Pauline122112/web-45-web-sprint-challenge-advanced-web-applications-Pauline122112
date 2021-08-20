@@ -14,18 +14,22 @@ const testColor = {
 const noColor = []
 
 test("Renders an empty list of colors without errors", () => {
-    render(<ColorList color={noColor}/>)
+	//Arrange
+	render(<ColorList color={noColor} />);
 });
 
 test("Renders a list of colors without errors", () => {
-    render(<ColorList color={testColor}/>)
+	//Arrange
+	render(<ColorList color={testColor} />);
 });
 
 test("Renders the EditForm when editing = true and does not render EditForm when editing = false", () => {
-
-    const toggleEdit = jest.fn()
-    render(<ColorList color={testColor}/>);
-    let editing = screen.queryByTestId("color");
-    userEvent.click(editing);
-    expect(toggleEdit).toBeCalled();
+	//Arrange
+	const toggleEdit = jest.fn();
+	render(<ColorList color={testColor} />);
+	//Act
+	let editing = screen.queryByTestId("color");
+	userEvent.click(editing);
+	//Assert
+	expect(toggleEdit).toBeCalled();
 });

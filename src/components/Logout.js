@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import axiosWithAuth from '../helpers/axiosWithAuth'
 
-
+//create logout information here. 
 const Logout = (props) => {
 	useEffect(() => {
 		axiosWithAuth()

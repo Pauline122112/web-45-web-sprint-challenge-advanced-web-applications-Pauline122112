@@ -11,19 +11,24 @@ const testColor = {
 	id: 1,
 };
 
+
+//Provide rendering of the BubblePage function
 test("Renders without errors", ()=> {
+    
     render(<BubblePage />)
 
 });
 
+
+    //fetchColorService is called on mount for this component.
 test("Renders appropriate number of colors passed in through mock", async ()=> {
-    //Keep in mind that our service is called on mount for this component.
-    fetchColorServices.mockResolvedValueOnce(testColor)
-
-		render(<BubblePage />);
-		const colors = screen.getAllByTestId("color")
-
-		await waitFor(() => {
-			expect(colors).toHaveLength(1);
-		});
+	//Arrange
+	fetchColorServices.mockResolvedValueOnce(testColor);
+	//Act
+	render(<BubblePage />);
+	const colors = screen.getAllByTestId("color");
+	//Assert
+	await waitFor(() => {
+		expect(colors).toHaveLength(1);
+	});
 });
