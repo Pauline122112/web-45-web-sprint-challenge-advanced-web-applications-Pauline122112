@@ -6,15 +6,20 @@ import "./styles.scss";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <header>
-          Color Picker Sprint Challenge
-          <a data-testid="logoutButton" href="#">logout</a>
-        </header>
-      </div>
-    </Router>
-  );
+		<Router>
+			<div className="App">
+				<header>
+					Color Picker Sprint Challenge
+					<a data-testid="loginButton" href="#">
+						login
+					</a>
+					<a data-testid="logoutButton" href="#">
+						logout
+					</a>
+				</header>
+			</div>
+		</Router>
+	);
 }
 
 export default App;
