@@ -41,7 +41,7 @@ const handleSubmit = e => {
 
 axiosWithAuth()
   .post('/api/login', formValues)
-  .then(res => {
+  .then((res) => {
     console.log('Login post works', res)
     localStorage.setItem('token', res.data.payload)
     push('/protected');
@@ -63,6 +63,7 @@ axiosWithAuth()
 						<input
 							type="text"
 							data-testid="username"
+              name="username"
 							id="username"
 							value={formValues.username}
 							onChange={handleChange}
@@ -80,7 +81,7 @@ axiosWithAuth()
 					</form>
 				</div>
 
-				<p data-testid="error" className="error">{error}
+				<p data-testid="errorMessage" className="error">{error}
 				</p>
 			</div>
 		);
