@@ -1,27 +1,41 @@
-import React from "react"
+import React, { useState } from "react"
 import axios from 'axios'
-import { render } from "@testing-library/react";
 
+
+const initialValues = {
+  username: 'Lambda', 
+  password: 'School'
+};
 
 const Login = () => {
 
-const [form, setForm] = useState(initialState)
-const [error, setError] = useState();
+  const [formValues, setFormValues] = useState(initialValues)
+  const [error, setError] = useState();
 
- const handleChange = e => {
-    this.setForm({
-      ...form, 
+    
+
+  const handleChange = e => {
+    setFormValues({
+      initialValues: {
+        ...this.formValues.initialValues,
         [e.target.name]: e.target.value
       }
     })
   }
-
-const submitHandler = e => {
-  e.preventDefault()
   //ADD SOMETHING
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-  axios.post('http://localhost:5000/api/login', this.state.credentials)
+
+
+const handleSubmit = e => {
+  e.preventDefault()
+
+  if (formValues.username !== "Lambda" || formValues.password !== "school")
+	{
+    setError("Username or Password incorrect.");
+  }
+
+  axios.post('http://localhost:5000/api/login', this.state.initialValues)
 
   .then(res => {
   this.props.history.push('/protected')
@@ -34,29 +48,35 @@ const submitHandler = e => {
 
  
     return (
-      <div>
-        <h1>Welcome to the Bubble App!</h1>
-        <div data-testid="loginForm" className="login-form">
-          <form onSubmit={this.login}>
-          <input
-            type="text"
-            id="username"
-            value={this.state.credentials.username}
-            onChange={this.handleChange}
-          />
-          <input
-            type="password"
-            id="password"
-            value={this.state.credentials.password}
-            onChange={this.handleChange}
-          />
-          <button>Log in</button>
-        </form>
-        </div>
-  
-        <p id="error" className="error">{error}</p>
-      </div>
-    );
+			<div>
+				<h1>Welcome to the Bubble App!</h1>
+				<div data-testid="loginForm" className="login-form">
+          <h2>Enter at your own risk</h2>
+					<form onSubmit={handleSubmit}>
+						<label htmlFor="username">Username</label>
+						<input
+							type="text"
+							data-testid="username"
+							id="username"
+							value={formValues.username}
+							onChange={handleChange}
+						/>
+						<label htmlFor="password">Password</label>
+						<input
+							type="password"
+							data-testid="password"
+							id="password"
+							value={initialValues.password}
+							onChange={handleChange}
+						/>
+						<button>Log in</button>
+					</form>
+				</div>
+
+				<p data-testid="error" className="error">{error}
+				</p>
+			</div>
+		);
     
   
 };
