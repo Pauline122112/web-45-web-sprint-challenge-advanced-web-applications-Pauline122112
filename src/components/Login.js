@@ -3,15 +3,37 @@ import axios from 'axios'
 import { render } from "@testing-library/react";
 
 
-const Login = () => {
+const Login = (e) => {
+
+ handleChange = e => {
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+login = e => {
+  e.preventDefault()
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
+  axios.post('http://localhost:5000/api/login', this.state.credentials)
+
+  .then(res => {
+  this.props.history.push('/protected')
+  localStorage.setItem("token", res.data.token)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
 
   const error = "";
   //replace with error state
 
 
-  render() {
+  render(){
     return (
       <div>
         <h1>Welcome to the Bubble App!</h1>
